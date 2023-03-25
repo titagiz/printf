@@ -7,7 +7,7 @@
  *
  * Return: Number of characters printed
  */
-int handle_mod(__attribute__((unused))va_list *ap)
+int handle_mod(__attribute__((unused)) va_list * ap)
 {
 	return (_putchar('%'));
 }
