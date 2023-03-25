@@ -23,6 +23,7 @@ int s_hand(va_list *ap)
 	char *s;
 
 	s = va_arg(*ap, char *);
+	s = s ? s : "(null)";
 	i = 0;
 	while (s[i])
 	{
