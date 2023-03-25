@@ -9,7 +9,7 @@
   */
 int c_hand(va_list *ap)
 {
-	return (_putchar(va_arg(*ap, int)));
+	return (_putchar((unsigned char) va_arg(*ap, int)));
 }
 /**
  * s_hand - handles 's' conversion specifier
