@@ -16,6 +16,7 @@ typedef struct handler
 int _putchar(char c);
 int c_hand(va_list *ap);
 int s_hand(va_list *ap);
+int per_hand(va_list *ap);
 int (*get_cs_handler(const char *cs))(va_list *);
 int _printf(const char *format, ...);
 

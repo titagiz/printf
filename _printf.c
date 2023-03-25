@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 	va_start(ap, format);
 	while (*format)
 	{
-		if (*format == '%')
+		if (*format == '%' && *(format + 1) != '\0')
 		{
 			fp = get_cs_handler((format + 1));
 			if (fp)
@@ -29,16 +29,15 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				if (*(format + 1) != '%')
-					nchar += _putchar(*format);
+				nchar += _putchar(*format);
 				nchar += _putchar(*(format + 1));
 			}
+			format += 2;
 		}
 		else
 		{
 			nchar += _putchar(*format++);
 		}
-		format += 2;
 	}
 	va_end(ap);
 	return (nchar);

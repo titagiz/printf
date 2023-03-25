@@ -15,6 +15,7 @@ int (*get_cs_handler(const char *cs))(va_list *)
 	handler_t handler[] = {
 		{"c", c_hand},
 		{"s", s_hand},
+		{"%", per_hand},
 		{NULL, NULL}
 	};
 	int i;

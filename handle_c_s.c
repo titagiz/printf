@@ -30,3 +30,14 @@ int s_hand(va_list *ap)
 	}
 	return (i);
 }
+/**
+ * per_hand - handles 's' conversion specifier
+ * @ap: Pointer to va_list
+ *
+ * Return: Number of characters printed
+ */
+int per_hand(__attribute__((unused)) va_list *ap)
+{
+	_putchar('%');
+	return (1);
+}
