@@ -26,14 +26,14 @@ int handle_dec(va_list *ap)
 			len++;
 		}
 		powten = 1;
-		for (j =1; j <= len - 1; j++)
+		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;
 			if (n < 0)
-				_putchar((digit * -1) +48);
-			else 
+				_putchar((digit * -1) + 48);
+			else
 				_putchar(digit + '0');
 			count++;
 			n -= digit * powten;
