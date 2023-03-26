@@ -16,7 +16,6 @@ int (*get_cs_handler(const char *cs))(va_list *)
 		{"c", handle_char},
 		{"s", handle_str},
 		{"%", handle_mod},
-		{"d", handle_dec},
 		{NULL, NULL}
 	};
 	int i;
