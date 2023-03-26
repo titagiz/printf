@@ -12,14 +12,13 @@
  */
 int (*get_cs_handler(const char *cs))(va_list *)
 {
-	unsigned int i = 0;
 	handler_t handler[] = {
 		{"c", handle_char},
 		{"s", handle_str},
 		{"%", handle_mod},
 		{"i", handle_int},
 		{"d", handle_dec},
-		{NULL, NULL};
+		{NULL, NULL},
 	};
 	int i;
 
