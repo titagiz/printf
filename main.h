@@ -21,6 +21,10 @@ int handle_str(va_list *ap);
 int handle_mod(va_list *ap);
 int handle_int(va_list *ap);
 int handle_dec(va_list *ap);
+int handle_unsig(va_list *ap);
+int handle_octal(va_list *ap);
+int handle_x(va_list *ap);
+int handle_X(va_list *ap);
 int (*get_cs_handler(const char *cs))(va_list *);
 int _printf(const char *format, ...);
 
