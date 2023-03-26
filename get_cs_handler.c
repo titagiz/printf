@@ -18,6 +18,8 @@ int (*get_cs_handler(const char *cs))(va_list *)
 		{"%", handle_mod},
 		{"i", handle_int},
 		{"d", handle_dec},
+		{"r", handle_rev},
+		{"b", handle_bin},
 		{NULL, NULL},
 	};
 	int i;
