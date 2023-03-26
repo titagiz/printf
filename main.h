@@ -13,6 +13,7 @@ typedef struct handler
 	int (*func)(va_list *);
 } handler_t;
 
+#include <stdarg.h>
 int _putchar(char c);
 int handle_char(va_list *ap);
 int handle_str(va_list *ap);
