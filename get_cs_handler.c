@@ -24,6 +24,7 @@ int (*get_cs_handler(const char *cs))(va_list *)
 		{"u", handle_udec},
 		{"x", handle_hex},
 		{"X", handle_heX},
+		{"S", handle_Str},
 		{NULL, NULL},
 	};
 	int i;
