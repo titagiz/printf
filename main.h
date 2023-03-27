@@ -27,6 +27,7 @@ int handle_oct(va_list *ap);
 int handle_udec(va_list *ap);
 int handle_hex(va_list *ap);
 int handle_heX(va_list *ap);
+int handle_Str(va_list *ap);
 int (*get_cs_handler(const char *cs))(va_list *);
 int _printf(const char *format, ...);
 
