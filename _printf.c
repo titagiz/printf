@@ -51,8 +51,6 @@ int handle_invalid_cs(cs_modifier_t cs_mod)
 	nchars += cs_mod.flag_c[0] ? _putchar('#') : 0;
 	nchars += cs_mod.flag_c[1] ? _putchar('+') : 0;
 	nchars += !cs_mod.flag_c[1] && cs_mod.flag_c[2] ? _putchar(' ') : 0;
-	nchars += cs_mod.len_md[0] ? _putchar('h') : 0;
-	nchars += cs_mod.len_md[1] ? _putchar('1') : 0;
 
 	return (nchars);
 }
