@@ -47,7 +47,7 @@ int handle_int(va_list *ap, cs_modifier_t cs_mod)
 		powten = 1;
 		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
-		count = _chk_flag_chars(sign, cs_mod);
+		count += _chk_flag_chars(sign, cs_mod);
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;
