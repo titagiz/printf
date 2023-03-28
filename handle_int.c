@@ -1,15 +1,34 @@
 #include <stdarg.h>
 #include "main.h"
 /**
- *handle_int - handles 'i' conversion specifier
- * @ap: Pointer to va_list
+ * _chk_flag_chars - handles 'd' conversion specifier
+ * @sign: Sign of the number
+ * @cs_mod: Structure to cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_int(va_list *ap)
+int _chk_flag_chars(int sign, cs_modifier_t cs_mod)
 {
-	int len, powten, j, digit, n, count = 0, num;
+	int nchar = 0;
 
+	if (sign && cs_mod.flag_c[1])
+		nchar += _putchar('+');
+	else if (sign && cs_mod.flag_c[2])
+		nchar += _putchar(' ');
+	return (nchar);
+}
+/**
+ *handle_int - handles 'i' conversion specifier
+ * @ap: Pointer to va_list
+ * @cs_mod: structure of cs modifier
+ *
+ * Return: Number of characters printed
+ */
+int handle_int(va_list *ap, cs_modifier_t cs_mod)
+{
+	int len, powten, j, digit, n, count = 0, num, sign = 1;
+
+	(void) cs_mod;
 	n = va_arg(*ap, int);
 	if (n != 0)
 	{
@@ -17,9 +36,9 @@ int handle_int(va_list *ap)
 		{
 			_putchar('-');
 			count++;
+			sign = 0;
 		}
-		num = n;
-		len = 0;
+		num = n, len = 0;
 		while (num != 0)
 		{
 			num /= 10;
@@ -28,6 +47,7 @@ int handle_int(va_list *ap)
 		powten = 1;
 		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
+		count = _chk_flag_chars(sign, cs_mod);
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;

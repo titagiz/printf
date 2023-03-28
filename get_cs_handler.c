@@ -10,7 +10,7 @@
  * Return: a pointer to the function that corresponds to
  *         the operator given as a parameter
  */
-int (*get_cs_handler(const char *cs))(va_list *)
+int (*get_cs_handler(const char *cs))(va_list *, cs_modifier_t)
 {
 	handler_t handler[] = {
 		{"c", handle_char},
@@ -25,6 +25,7 @@ int (*get_cs_handler(const char *cs))(va_list *)
 		{"x", handle_hex},
 		{"X", handle_heX},
 		{"S", handle_Str},
+		{"p", handle_ptr},
 		{NULL, NULL},
 	};
 	int i;

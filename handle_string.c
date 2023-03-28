@@ -57,20 +57,24 @@ int handle_s_S(char cs, va_list *ap)
 /**
  * handle_str - handles 's' conversion specifier
  * @ap: Pointer to va_list
+ * @cs_mod: Structure of cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_str(va_list *ap)
+int handle_str(va_list *ap, cs_modifier_t cs_mod)
 {
+	(void) cs_mod;
 	return (handle_s_S('s', ap));
 }
 /**
  * handle_Str - handles 'S' conversion specifier
  * @ap: Pointer to va_list
+ * @cs_mod: Structure of cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_Str(va_list *ap)
+int handle_Str(va_list *ap, cs_modifier_t cs_mod)
 {
+	(void) cs_mod;
 	return (handle_s_S('S', ap));
 }
