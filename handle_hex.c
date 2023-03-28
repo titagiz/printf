@@ -39,8 +39,9 @@ int handle_xX(char cs, va_list *ap, cs_modifier_t cs_mod)
 	int i, j, count = 1;
 	char *buff, tmp;
 
-	n = cs_mod.len_md[0] ?  (unsigned short int)va_arg(*ap, unsigned int) :
-		cs_mod.len_md[1] ? va_arg(*ap, unsigned long int) :
+	n = cs_mod.len_md[1] == 1 ? va_arg(*ap, unsigned long int) :
+		cs_mod.len_md[0] == 1 ?
+		(unsigned short int)va_arg(*ap, unsigned int) :
 		(unsigned int)va_arg(*ap, unsigned int);
 	if (n != 0)
 	{
