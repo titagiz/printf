@@ -21,6 +21,11 @@ int (*get_cs_handler(const char *cs))(va_list *)
 		{"r", handle_rev},
 		{"b", handle_bin},
 		{"R", handle_rot13},
+		{"o", handle_oct},
+		{"u", handle_udec},
+		{"x", handle_hex},
+		{"X", handle_heX},
+		{"S", handle_Str},
 		{NULL, NULL},
 	};
 	int i;
