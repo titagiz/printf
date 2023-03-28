@@ -51,9 +51,7 @@ int handle_int(va_list *ap, cs_modifier_t cs_mod)
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;
-			if (n < 0)
-				_putchar((digit * -1) + 48);
-			else
+			(n < 0) ? _putchar((digit * -1) + 48) :
 				_putchar(digit + '0');
 			count++;
 			n -= digit * powten;
