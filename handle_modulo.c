@@ -8,9 +8,8 @@
  *
  * Return: Number of characters printed
  */
-int handle_mod(va_list *ap, cs_modifier_t cs_mod)
+int handle_mod(__attribute__((unused)) va_list * ap,
+		__attribute__((unused)) cs_modifier_t cs_mod)
 {
-	(void) ap;
-	(void) cs_mod;
 	return (_putchar('%'));
 }
