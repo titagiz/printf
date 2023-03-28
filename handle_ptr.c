@@ -10,7 +10,7 @@
  *
  * Return: Number of characters printed
  */
-int handle_ptr(va_list *ap, cs_modifier_t cs_mod)
+int andle_ptr(va_list *ap, cs_modifier_t cs_mod)
 {
 	void *ptr;
 	unsigned long n;
