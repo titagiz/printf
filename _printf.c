@@ -1,5 +1,3 @@
-#include <stddef.h>
-#include <stdarg.h>
 #include "main.h"
 
 /**
@@ -16,6 +14,7 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
+
 	va_start(ap, format);
 	while (*format)
 	{
@@ -33,7 +32,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				nchar += _putchar('%');
+				nchar += _putchar(*format);
 				nchar += _putchar(*(format + 1));
 			}
 			format += 2;
