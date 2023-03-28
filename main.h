@@ -11,10 +11,14 @@
   *          flag_c[0] for '#'
   *          flag_c[1] for '+'
   *          flag_c[2] for ' '
+  * @len_md: Length modifier
+  *          len_md[0] for 'h'
+  *          len_md[1] for 'l'
   */
 typedef struct cs_modifier
 {
 	char flag_c[3];
+	char len_md[2];
 } cs_modifier_t;
 
 /**

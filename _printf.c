@@ -12,16 +12,23 @@
 const char *get_cs_modifers(const char *format, cs_modifier_t *cs_mod)
 {
 	cs_mod->flag_c[0] = cs_mod->flag_c[1] = cs_mod->flag_c[2] = 0;
+	cs_mod->len_md[0] = cs_mod->len_md[1] = 0;
 
 	while (*(format + 1) == '#' || *(format + 1) == '+'
-			|| *(format + 1) == ' ')
+			|| *(format + 1) == ' ' || *(format + 1) == 'h'
+			|| *(format + 1) == 'l')
 	{
 		if (*(format + 1) == '#')
 			cs_mod->flag_c[0] = 1;
-		else if (*(format + 1) == '+')
+		if (*(format + 1) == '+')
 			cs_mod->flag_c[1] = 1;
-		else
+		if (*(format + 1) == ' ')
 			cs_mod->flag_c[2] = 1;
+		if (*(format + 1) == 'h')
+			cs_mod->len_md[0] = 1;
+		if (*(format + 1) == 'l')
+			cs_mod->len_md[1] = 1;
+
 		format++;
 	}
 	return (format);

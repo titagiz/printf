@@ -27,10 +27,10 @@ int chk_flag_chars(int sign, cs_modifier_t cs_mod)
  */
 int handle_dec(va_list *ap, cs_modifier_t cs_mod)
 {
-	int len, powten, j, digit, n, count = 0, num, sign = 1;
+	long int len, powten, j, digit, n, count = 0, num, sign = 1;
 
-	(void) cs_mod;
-	n = va_arg(*ap, int);
+	n = cs_mod.len_md[0] ?  (short int)va_arg(*ap, int) : cs_mod.len_md[1] ?
+		va_arg(*ap, long int) : (int)va_arg(*ap, int);
 	if (n != 0)
 	{
 		if (n < 0)
