@@ -24,11 +24,10 @@ long dec_to_oct(unsigned int num)
 /**
  * handle_oct - handles 'o' conversion specifier
  * @ap: Pointer to va_list
- * @cs_mod: Structure of cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_oct(va_list *ap, cs_modifier_t cs_mod)
+int handle_oct(va_list *ap)
 {
 	long int len, powten, j, digit, n, count = 0, num;
 
@@ -46,8 +45,6 @@ int handle_oct(va_list *ap, cs_modifier_t cs_mod)
 		num = dec_to_oct(n);
 		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
-		if (cs_mod.flag_c[0])
-			count += _putchar('0');
 		for (j = 1; j <= len; j++)
 		{
 			digit = num / powten;

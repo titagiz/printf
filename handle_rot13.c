@@ -3,11 +3,10 @@
 /**
  *handle_rot13 - handles 'R' conversion specifier
  * @ap: Pointers to va_list
- * @cs_mod: Structure of cs modifiers
  *
  * Return: Number of charcters printed
  */
-int handle_rot13(va_list *ap, cs_modifier_t cs_mod)
+int handle_rot13(va_list *ap)
 {
 	int j, i, count = 0;
 	char *r;
@@ -15,8 +14,7 @@ int handle_rot13(va_list *ap, cs_modifier_t cs_mod)
 	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
 	r = va_arg(*ap, char *);
-	(void) cs_mod;
-	
+
 	if (r == NULL)
 		r = "(AHYY)";
 	for (j = 0; r[j] != '\0'; j++)

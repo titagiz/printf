@@ -21,13 +21,12 @@ int chk_flag_chars(int sign, cs_modifier_t cs_mod)
 /**
  * handle_dec - handles 'd' conversion specifier
  * @ap: Pointer to va_list
- * @cs_mod: Structure to cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_dec(va_list *ap, cs_modifier_t cs_mod)
+int handle_dec(va_list *ap)
 {
-	int len, powten, j, digit, n, count = 0, num, sign = 1;
+	int len, powten, j, digit, n, count = 0, num;
 
 	n = va_arg(*ap, int);
 	if (n != 0)
@@ -36,7 +35,6 @@ int handle_dec(va_list *ap, cs_modifier_t cs_mod)
 		{
 			_putchar('-');
 			count++;
-			sign = 0;
 		}
 		num = n, len = 0;
 		while (num != 0)
@@ -47,7 +45,6 @@ int handle_dec(va_list *ap, cs_modifier_t cs_mod)
 		powten = 1;
 		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
-		count += chk_flag_chars(sign, cs_mod);
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;
@@ -60,7 +57,6 @@ int handle_dec(va_list *ap, cs_modifier_t cs_mod)
 	}
 	else
 	{
-		count = chk_flag_chars(1, cs_mod);
 		count += _putchar('0');
 	}
 	return (count);

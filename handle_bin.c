@@ -3,16 +3,14 @@
 /**
  *handle_bin - handles 'b' conversion specifier
  * @ap: Pointer to va_list
- * @cs_mod: structure to conversion specifier modifiers
  *
  * Return: Number of characters printed
  */
-int handle_bin(va_list *ap, cs_modifier_t cs_mod)
+int handle_bin(va_list *ap)
 {
 	unsigned int len, powten, j, digit, n, num;
 	int count = 0;
 
-	(void) cs_mod;
 	n = va_arg(*ap, unsigned int);
 	if (n != 0)
 	{

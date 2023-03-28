@@ -6,18 +6,16 @@
 /**
  * handle_ptr - handles 'p' conversion specifier
  * @ap: Pointer to va_list
- * @cs_mod: Structure of cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_ptr(va_list *ap, cs_modifier_t cs_mod)
+int handle_ptr(va_list *ap)
 {
 	void *ptr;
 	unsigned long n;
 	int i, j, count = 5;
 	char *buff, tmp;
 
-	(void) cs_mod;
 	ptr  =  va_arg(*ap, void *);
 	if (ptr)
 	{

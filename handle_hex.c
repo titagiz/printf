@@ -29,11 +29,10 @@ int handle_flag_chars(char cs, cs_modifier_t cs_mod)
  * handle_xX - handles 'x','X' conversion specifier
  * @cs: Conversion specifier
  * @ap: Pointer to va_list
- * @cs_mod: structure to cs modifier
  *
  * Return: Number of characters printed
  */
-int handle_xX(char cs, va_list *ap, cs_modifier_t cs_mod)
+int handle_xX(char cs, va_list *ap)
 {
 	unsigned int n;
 	int i, j, count = 1;
@@ -45,7 +44,7 @@ int handle_xX(char cs, va_list *ap, cs_modifier_t cs_mod)
 		buff = malloc(8);
 		if (!buff)
 			return (0);
-		count = handle_flag_chars(cs, cs_mod);
+		count = 0;
 		i = 0;
 		while (n != 0)
 		{
@@ -74,22 +73,20 @@ int handle_xX(char cs, va_list *ap, cs_modifier_t cs_mod)
 /**
  * handle_hex - handles 'x' conversion specifier
  * @ap: point to va_list
- * @cs_mod: structure of cs modifier
  *
  * Return: number of characters printed
  */
-int handle_hex(va_list *ap, cs_modifier_t cs_mod)
+int handle_hex(va_list *ap)
 {
-	return (handle_xX('x', ap, cs_mod));
+	return (handle_xX('x', ap));
 }
 /**
  * handle_heX - handles 'x' conversion specifier
  * @ap: point to va_list
- * @cs_mod: Structure to cs modifier
  *
  * Return: number of characters printed
  */
-int handle_heX(va_list *ap, cs_modifier_t cs_mod)
+int handle_heX(va_list *ap)
 {
-	return (handle_xX('X', ap, cs_mod));
+	return (handle_xX('X', ap));
 }
