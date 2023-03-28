@@ -35,13 +35,11 @@ int handle_flag_chars(char cs, cs_modifier_t cs_mod)
  */
 int handle_xX(char cs, va_list *ap, cs_modifier_t cs_mod)
 {
-	unsigned long int n;
+	unsigned int n;
 	int i, j, count = 1;
 	char *buff, tmp;
 
-	n = cs_mod.len_md[1] ? va_arg(*ap, unsigned long int) :
-		cs_mod.len_md[0] ? (unsigned short int)va_arg(*ap, unsigned int)
-		: (unsigned int)va_arg(*ap, unsigned int);
+	n = va_arg(*ap, unsigned int);
 	if (n != 0)
 	{
 		buff = malloc(8);
