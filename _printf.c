@@ -28,23 +28,6 @@ const char *get_cs_modifers(const char *format, cs_modifier_t *cs_mod)
 	return (format);
 }
 /**
- * handle_invalid_cs - prints string when invalid cs is found
- * @cs_mod: structure of cs modifier
- *
- * Return: number of chars
- */
-int handle_invalid_cs(cs_modifier_t cs_mod)
-{
-	int nchars = 0;
-
-	nchars += _putchar('%');
-	nchars += cs_mod.flag_c[0] ? _putchar('#') : 0;
-	nchars += cs_mod.flag_c[1] ? _putchar('+') : 0;
-	nchars += !cs_mod.flag_c[1] && cs_mod.flag_c[2] ? _putchar(' ') : 0;
-
-	return (nchars);
-}
-/**
  * _printf - produces output according to a format
  * @format: a character string
  *
@@ -74,7 +57,11 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				nchar += handle_invalid_cs(cs_mod);
+				nchar += _putchar('%');
+				nchar += cs_mod.flag_c[0] ? _putchar('#') : 0;
+				nchar += cs_mod.flag_c[1] ? _putchar('+') : 0;
+				nchar += !cs_mod.flag_c[1] && cs_mod.flag_c[2] ?
+					_putchar(' ') : 0;
 				nchar += _putchar(*(format + 1));
 			}
 			format += 2;
