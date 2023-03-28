@@ -20,7 +20,6 @@ int (*get_cs_handler(const char *cs))(va_list *, cs_modifier_t)
 		{"d", handle_dec},
 		{"r", handle_rev},
 		{"b", handle_bin},
-		{"R", handle_rot13},
 		{"o", handle_oct},
 		{"u", handle_udec},
 		{"x", handle_hex},
