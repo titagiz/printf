@@ -62,6 +62,7 @@ int _printf(const char *format, ...)
 				nchar += cs_mod.flag_c[1] ? _putchar('+') : 0;
 				nchar += !cs_mod.flag_c[1] && cs_mod.flag_c[2] ?
 					_putchar(' ') : 0;
+				nchar += _putchar(*(format + 1));
 			}
 			format += 2;
 		}
