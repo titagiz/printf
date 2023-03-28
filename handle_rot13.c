@@ -14,8 +14,9 @@ int handle_rot13(va_list *ap, cs_modifier_t cs_mod)
 	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
 	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	(void) cs_mod;
 	r = va_arg(*ap, char *);
+	(void) cs_mod;
+	
 	if (r == NULL)
 		r = "(AHYY)";
 	for (j = 0; r[j] != '\0'; j++)
