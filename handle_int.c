@@ -62,8 +62,9 @@ int handle_int(va_list *ap, cs_modifier_t cs_mod)
 	}
 	else
 	{
-		_putchar('0');
-		return (1);
+		if (cs_mod.flag_c[2])
+			count += _putchar(' ');
+		count += _putchar('0');
 	}
 	return (count);
 }
