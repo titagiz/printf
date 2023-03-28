@@ -17,7 +17,7 @@ long dec_to_oct(unsigned int num)
 		rem = num % 8;
 		num = num / 8;
 		oct += (rem * i);
-		i *= 10;
+		i *= 1;
 	}
 	return (oct);
 }
