@@ -9,7 +9,7 @@
  *
  * Return: Number of characters printed
  */
-int handle_flag_chars(char cs, cs_modifier_t cs_mod)
+int andle_flag_chars(char cs, cs_modifier_t cs_mod)
 {
 	int nchar = 0;
 
