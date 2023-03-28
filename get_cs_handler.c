@@ -5,6 +5,7 @@
 /**
  * get_cs_handler - selects the correct function to perform
  *                  the operation asked by the user
+ * @cs: conversion specifier
  *
  * Return: a pointer to the function that corresponds to
  *         the operator given as a parameter
