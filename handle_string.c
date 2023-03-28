@@ -7,7 +7,7 @@
  *
  * Return: None.
  */
-void cha_to_hex(char c)
+void char_to_hex(char c)
 {
 	char tmp;
 
