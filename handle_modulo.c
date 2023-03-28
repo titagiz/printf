@@ -8,7 +8,7 @@
  *
  * Return: Number of characters printed
  */
-int handle_od(va_list *ap, cs_modifier_t cs_mod)
+int handle_mod(va_list *ap, cs_modifier_t cs_mod)
 {
 	(void) ap;
 	(void) cs_mod;
