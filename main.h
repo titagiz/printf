@@ -37,6 +37,7 @@ int handle_int(va_list *ap, cs_modifier_t cs_mod);
 int handle_dec(va_list *ap, cs_modifier_t cs_mod);
 int handle_rev(va_list *ap, cs_modifier_t cs_mod);
 int handle_bin(va_list *ap, cs_modifier_t cs_mod);
+int handle_rot13(va_list *ap, cs_modifier_t cs_mod);
 int handle_oct(va_list *ap, cs_modifier_t cs_mod);
 int handle_udec(va_list *ap, cs_modifier_t cs_mod);
 int handle_hex(va_list *ap, cs_modifier_t cs_mod);
