@@ -25,6 +25,16 @@ const char *get_cs_modifers(const char *format, cs_modifier_t *cs_mod)
 			cs_mod->flag_c[2] = 1;
 		format++;
 	}
+	if (*(format + 1) == 'h')
+	{
+		cs_mod->len_md[0] = 1;
+		format++;
+	}
+	else if (*(format + 1) == 'l')
+	{
+		cs_mod->len_md[1] = 1;
+		format++;
+	}
 	return (format);
 }
 /**

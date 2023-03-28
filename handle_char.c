@@ -11,5 +11,5 @@
 int handle_char(va_list *ap, cs_modifier_t cs_mod)
 {
 	(void) cs_mod;
-	return (_putchar(va_arg(*ap, int)));
+	return (_putchar((unsigned char)va_arg(*ap, int)));
 }
