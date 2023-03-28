@@ -7,7 +7,7 @@
  *
  * Return: octal of the given number
  */
-long dec_to_oct(unsigned int num)
+long ec_to_oct(unsigned int num)
 {
 	long oct = 0, i = 1;
 	int rem;
