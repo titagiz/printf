@@ -3,15 +3,19 @@
 
 /**
  * handle_udec - handles 'u' conversion specifier
- * @ap: Pointer to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_udec(va_list *ap)
+int handle_udec(arg_t *arg)
 {
-	unsigned int len, powten, j, digit, n, count = 0, num;
+	unsigned long int powten, n, num;
+	int len, j, digit, count = 0;
 
-	n = va_arg(*ap, unsigned int);
+	n = arg->len_md[0] ? va_arg(*(arg->ap), unsigned long int) :
+		arg->len_md[1] ?
+		(unsigned short int)va_arg(*(arg->ap), unsigned int) :
+		(unsigned int)va_arg(*(arg->ap), unsigned int);
 	if (n != 0)
 	{
 		num = n;
@@ -27,16 +31,14 @@ int handle_udec(va_list *ap)
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;
-			_putchar(digit + '0');
-			count++;
+			count += _putchar(digit + '0');
 			n -= digit * powten;
 			powten /= 10;
 		}
 	}
 	else
 	{
-		_putchar('0');
-		return (1);
+		count = _putchar('0');
 	}
 	return (count);
 }

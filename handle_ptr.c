@@ -5,18 +5,18 @@
 
 /**
  * handle_ptr - handles 'p' conversion specifier
- * @ap: Pointer to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_ptr(va_list *ap)
+int handle_ptr(arg_t *arg)
 {
 	void *ptr;
 	unsigned long n;
 	int i, j, count = 5;
 	char *buff, tmp;
 
-	ptr  =  va_arg(*ap, void *);
+	ptr  =  va_arg(*(arg->ap), void *);
 	if (ptr)
 	{
 		buff = malloc(16);

@@ -3,12 +3,12 @@
 
 /**
  * handle_mod - handles '%' conversion specifier
- * @ap: Pointer to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_mod(va_list *ap)
+int handle_mod(arg_t *arg)
 {
-	(void) ap;
+	(void) arg;
 	return (_putchar('%'));
 }

@@ -2,18 +2,18 @@
 #include "main.h"
 /**
  *handle_rot13 - handles 'R' conversion specifier
- * @ap: Pointers to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of charcters printed
  */
-int handle_rot13(va_list *ap)
+int handle_rot13(arg_t *arg)
 {
 	int j, i, count = 0;
 	char *r;
 	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
 	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	r = va_arg(*ap, char *);
+	r = va_arg(*(arg->ap), char *);
 
 	if (r == NULL)
 		r = "(AHYY)";

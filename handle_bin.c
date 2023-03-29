@@ -2,16 +2,16 @@
 #include "main.h"
 /**
  *handle_bin - handles 'b' conversion specifier
- * @ap: Pointer to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_bin(va_list *ap)
+int handle_bin(arg_t *arg)
 {
 	unsigned int len, powten, j, digit, n, num;
 	int count = 0;
 
-	n = va_arg(*ap, unsigned int);
+	n = va_arg(*(arg->ap), unsigned int);
 	if (n != 0)
 	{
 		num = n;
@@ -35,8 +35,7 @@ int handle_bin(va_list *ap)
 	}
 	else
 	{
-		_putchar('0');
-		return (1);
+		count = _putchar('0');
 	}
 	return (count);
 }

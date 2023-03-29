@@ -4,37 +4,40 @@
 /**
  * chk_flag_chars - handles 'd' conversion specifier
  * @sign: Sign of the number
- * @cs_mod: Structure to cs modifier
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int chk_flag_chars(int sign, cs_modifier_t cs_mod)
+int chk_flag_chars(int sign, arg_t *arg)
 {
 	int nchar = 0;
 
-	if (sign && cs_mod.flag_c[1])
+	if (sign && arg->flag_c[1])
 		nchar += _putchar('+');
-	else if (sign && cs_mod.flag_c[2])
+	else if (sign && arg->flag_c[2])
 		nchar += _putchar(' ');
 	return (nchar);
 }
 /**
  * handle_dec - handles 'd' conversion specifier
- * @ap: Pointer to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_dec(va_list *ap)
+int handle_dec(arg_t *arg)
 {
-	int len, powten, j, digit, n, count = 0, num;
+	long int powten, n, num;
+	int len, j, digit, count = 0, sign = 1;
 
-	n = va_arg(*ap, int);
+	n = arg->len_md[0] ? va_arg(*(arg->ap), long int) :
+		arg->len_md[1] ? (short int)va_arg(*(arg->ap), int) :
+		(int)va_arg(*(arg->ap), int);
 	if (n != 0)
 	{
 		if (n < 0)
 		{
-			_putchar('-');
-			count++;
+			count += _putchar('-');
+			sign = 0;
 		}
 		num = n, len = 0;
 		while (num != 0)
@@ -45,6 +48,7 @@ int handle_dec(va_list *ap)
 		powten = 1;
 		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
+		count += chk_flag_chars(sign, arg);
 		for (j = 1; j <= len; j++)
 		{
 			digit = n / powten;
@@ -57,6 +61,7 @@ int handle_dec(va_list *ap)
 	}
 	else
 	{
+		count = chk_flag_chars(1, arg);
 		count += _putchar('0');
 	}
 	return (count);

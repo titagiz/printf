@@ -3,11 +3,11 @@
 
 /**
   * handle_char - handles 'c' specifier
-  * @ap: Pointer to va_list
+  *  @arg: point to arguments structure
   *
   * Return: 1
   */
-int handle_char(va_list *ap)
+int handle_char(arg_t *arg)
 {
-	return (_putchar((unsigned char) va_arg(*ap, int)));
+	return (_putchar((unsigned char) va_arg(*(arg->ap), int)));
 }

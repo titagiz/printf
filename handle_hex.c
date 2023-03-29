@@ -5,20 +5,20 @@
 /**
  * handle_flag_chars - handles flag characters
  * @cs: Conversion specifier
- * @cs_mod: structure to cs modifier
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_flag_chars(char cs, cs_modifier_t cs_mod)
+int handle_flag_chars(char cs, arg_t *arg)
 {
 	int nchar = 0;
 
-	if (cs == 'x' && cs_mod.flag_c[0])
+	if (cs == 'x' && arg->flag_c[0])
 	{
 		nchar += _putchar('0');
 		nchar += _putchar('x');
 	}
-	if (cs == 'X' && cs_mod.flag_c[0])
+	if (cs == 'X' && arg->flag_c[0])
 	{
 		nchar += _putchar('0');
 		nchar += _putchar('X');
@@ -28,23 +28,26 @@ int handle_flag_chars(char cs, cs_modifier_t cs_mod)
 /**
  * handle_xX - handles 'x','X' conversion specifier
  * @cs: Conversion specifier
- * @ap: Pointer to va_list
+ * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_xX(char cs, va_list *ap)
+int handle_xX(char cs, arg_t *arg)
 {
-	unsigned int n;
+	unsigned long int n;
 	int i, j, count = 1;
 	char *buff, tmp;
 
-	n = va_arg(*ap, unsigned int);
+	n = arg->len_md[0] ? va_arg(*(arg->ap), unsigned long int) :
+		arg->len_md[1] ?
+		(unsigned short int)va_arg(*(arg->ap), unsigned int) :
+		(unsigned int)va_arg(*(arg->ap), unsigned int);
 	if (n != 0)
 	{
 		buff = malloc(8);
 		if (!buff)
 			return (0);
-		count = 0;
+		count = handle_flag_chars(cs, arg);
 		i = 0;
 		while (n != 0)
 		{
@@ -72,21 +75,21 @@ int handle_xX(char cs, va_list *ap)
 }
 /**
  * handle_hex - handles 'x' conversion specifier
- * @ap: point to va_list
+ * @arg: point to arguments structure
  *
  * Return: number of characters printed
  */
-int handle_hex(va_list *ap)
+int handle_hex(arg_t *arg)
 {
-	return (handle_xX('x', ap));
+	return (handle_xX('x', arg));
 }
 /**
  * handle_heX - handles 'x' conversion specifier
- * @ap: point to va_list
+ * @arg: point to arguments structure
  *
  * Return: number of characters printed
  */
-int handle_heX(va_list *ap)
+int handle_heX(arg_t *arg)
 {
-	return (handle_xX('X', ap));
+	return (handle_xX('X', arg));
 }
