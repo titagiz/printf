@@ -25,12 +25,12 @@ const char *get_cs_modifers(const char *format, arg_t *arg)
 			arg->flag_c[2] = 1;
 		format++;
 	}
-	if (*(format + 1) == 'h')
+	if (*(format + 1) == 'l')
 	{
 		arg->len_md[0] = 1;
 		format++;
 	}
-	else if (*(format + 1) == 'l')
+	else if (*(format + 1) == 'h')
 	{
 		arg->len_md[1] = 1;
 		format++;
