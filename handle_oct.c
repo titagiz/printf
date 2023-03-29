@@ -1,29 +1,10 @@
 #include <stdarg.h>
+#include <stdlib.h>
 #include "main.h"
 
 #include <stdarg.h>
 #include "main.h"
 
-/**
- * dec_to_oct - converts unsigned number into octal
- * @num: unsigned  number to be converted
- *
- * Return: octal of the given number
- */
-unsigned long int dec_to_oct(unsigned long int num)
-{
-	unsigned long int oct = 0, i = 1;
-	int rem;
-
-	while (num != 0)
-	{
-		rem = num % 8;
-		num = num / 8;
-		oct += (rem * i);
-		i *= 10;
-	}
-	return (oct);
-}
 /**
  * handle_oct - handles 'o' conversion specifier
  * @arg: point to arguments structure
@@ -32,8 +13,9 @@ unsigned long int dec_to_oct(unsigned long int num)
  */
 int handle_oct(arg_t *arg)
 {
-	unsigned long int powten, n, num;
-	int len, j, digit, count = 0;
+	unsigned long int n;
+	int i, j, count = 0;
+	char *buff;
 
 	n = arg->len_md[0] ? va_arg(*(arg->ap), unsigned long int) :
 		arg->len_md[1] ?
@@ -41,26 +23,22 @@ int handle_oct(arg_t *arg)
 		(unsigned int)va_arg(*(arg->ap), unsigned int);
 	if (n != 0)
 	{
-		num = dec_to_oct(n);
-		len = 0;
-		while (num != 0)
+		buff = malloc(22);
+		if (!buff)
+			return (0);
+		i = 0;
+		while (n)
 		{
-			num /= 10;
-			len++;
+			buff[i] = (n % 8) + '0';
+			n /= 8;
+			i++;
 		}
-		powten = 1;
-		num = dec_to_oct(n);
-		for (j = 1; j <= len - 1; j++)
-			powten *= 10;
 		if (arg->flag_c[0])
 			count += _putchar('0');
-		for (j = 1; j <= len; j++)
-		{
-			digit = num / powten;
-			count += _putchar(digit + '0');
-			num -= digit * powten;
-			powten /= 10;
-		}
+		count += i;
+		for (j = i - 1; j >= 0; j--)
+			_putchar(buff[j]);
+		free(buff);
 	}
 	else
 	{
