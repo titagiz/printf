@@ -29,7 +29,7 @@ int handle_rot13(arg_t *arg)
 			 (r[i] >= 78 && r[i] <= 90))
 			_putchar(*(r + i) - 13);
 
-		else 
+		else
 			_putchar(r[i]);
 	}
 	return (count);
