@@ -46,6 +46,6 @@ int get_cs_handler(arg_t *arg)
 		i++;
 	}
 	i = handle_invalid_cs(arg);
-	i += _putchar(*(arg->cs + 1));
+	i += _putchar(*arg->cs);
 	return (i);
 }
