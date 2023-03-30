@@ -47,7 +47,6 @@ int handle_none_zero_value(long int n, arg_t *arg)
 	if (n < 0)
 	{
 		arg->buff[i++] = '-';
-		n *= -1;
 	}
 	else if (arg->flag_c[1] || arg->flag_c[2])
 	{
@@ -62,7 +61,7 @@ int handle_none_zero_value(long int n, arg_t *arg)
 	for (j = 0; j < len; j++, i++)
 	{
 		digit = n / powten;
-		arg->buff[i] = digit + '0';
+		arg->buff[i] = (n < 0) ? (digit * -1) + '0' : digit + '0';
 		n -= (digit * powten);
 		powten /= 10;
 	}
