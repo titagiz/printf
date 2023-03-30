@@ -41,6 +41,9 @@ int handle_none_zero_value(long int n, arg_t *arg)
 	num = n;
 	for (num = n; num; num /= 10, len++)
 		;
+	j = (n < 0 || arg->flag_c[1] || arg->flag_c[2]) ? 1 : 0;
+	for (; i < arg->field_wd - len - j; i++)
+		arg->buff[i] = ' ';
 	if (n < 0)
 	{
 		arg->buff[i++] = '-';
@@ -53,8 +56,6 @@ int handle_none_zero_value(long int n, arg_t *arg)
 		else
 			arg->buff[i++] = ' ';
 	}
-	for (; i < arg->field_wd - len; i++)
-		arg->buff[i] = ' ';
 	powten = 1;
 	for (j = 1; j <= len - 1; j++)
 		powten *= 10;
