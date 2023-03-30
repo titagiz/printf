@@ -12,7 +12,7 @@ int handle_rot13(arg_t *arg)
 	char *r;
 
 	r = va_arg(*(arg->ap), char *);
-	
+
 	if (r == NULL)
 		return (-1);
 
@@ -29,8 +29,8 @@ int handle_rot13(arg_t *arg)
 			 (r[i] >= 78 && r[i] <= 90))
 			_putchar(*(r + i) - 13);
 
-		else _putchar(r[i]);
+		else 
+			_putchar(r[i]);
 	}
-
 	return (count);
 }
