@@ -3,21 +3,37 @@
 #include "main.h"
 
 /**
+ * handle_invalid_cs - prints string when invalid cs is found
+ * @arg: point to arguments structure
+ *
+ * Return: number of characters
+ */
+int handle_invalid_cs(arg_t *arg)
+{
+	int nchars = 0;
+
+	nchars += _putchar('%');
+	nchars += arg->flag_c[0] ? _putchar('#') : 0;
+	nchars += arg->flag_c[1] ? _putchar('+') : 0;
+	nchars += !arg->flag_c[1] && arg->flag_c[2] ? _putchar(' ') : 0;
+
+	return (nchars);
+}
+/**
  * get_cs_handler - selects the correct function to perform
  *                  the operation asked by the user
- * @cs: conversion specifier
+ * @arg: point to arg structure
  *
- * Return: a pointer to the function that corresponds to
- *         the operator given as a parameter
+ * Return: Number of characters displayed
  */
-int (*get_cs_handler(const char *cs))(arg_t *)
+int get_cs_handler(arg_t *arg)
 {
 	handler_t handler[] = {
-		{"c", handle_char}, {"s", handle_str},   {"%", handle_mod},
-		{"i", handle_int},  {"d", handle_dec},   {"r", handle_rev},
+		{"c", handle_char}, {"s", handle_s_S},   {"%", handle_mod},
+		{"i", handle_dec},  {"d", handle_dec},   {"r", handle_rev},
 		{"b", handle_bin},  {"R", handle_rot13}, {"o", handle_oct},
-		{"u", handle_udec}, {"x", handle_hex},   {"X", handle_heX},
-		{"S", handle_Str},  {"p", handle_ptr},
+		{"u", handle_udec}, {"x", handle_hexX},  {"X", handle_hexX},
+		{"S", handle_s_S},  {"p", handle_ptr},
 		{NULL, NULL},
 	};
 	int i;
@@ -25,9 +41,11 @@ int (*get_cs_handler(const char *cs))(arg_t *)
 	i = 0;
 	while (handler[i].cs)
 	{
-		if (*(handler[i].cs) == *cs)
-			return (handler[i].func);
+		if (*(handler[i].cs) == *(arg->cs))
+			return (handler[i].func(arg));
 		i++;
 	}
-	return (NULL);
+	i = handle_invalid_cs(arg);
+	i += _putchar(*(arg->cs + 1));
+	return (i);
 }

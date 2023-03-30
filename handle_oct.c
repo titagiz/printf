@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "main.h"
 
-#include <stdarg.h>
-#include "main.h"
-
 /**
  * handle_oct - handles 'o' conversion specifier
  * @arg: point to arguments structure
@@ -34,15 +31,19 @@ int handle_oct(arg_t *arg)
 			i++;
 		}
 		if (arg->flag_c[0])
-			count += _putchar('0');
-		count += i;
+			buff[i++] = '0';
+		for (; i < arg->field_wd; i++)
+			buff[i] = ' ';
+		count = i;
 		for (j = i - 1; j >= 0; j--)
 			_putchar(buff[j]);
 		free(buff);
 	}
 	else
 	{
-		count = _putchar('0');
+		for (i = 0; i < arg->field_wd - 1; i++)
+			count += _putchar(' ');
+		count += _putchar('0');
 	}
 	return (count);
 }

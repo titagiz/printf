@@ -1,4 +1,5 @@
 #include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
 
 /**
@@ -10,7 +11,7 @@
 int handle_udec(arg_t *arg)
 {
 	unsigned long int powten, n, num;
-	int len, j, digit, count = 0;
+	int len, j, i, digit, count = 0;
 
 	n = arg->len_md[0] ? va_arg(*(arg->ap), unsigned long int) :
 		arg->len_md[1] ?
@@ -28,17 +29,23 @@ int handle_udec(arg_t *arg)
 		powten = 1;
 		for (j = 1; j <= len - 1; j++)
 			powten *= 10;
-		for (j = 1; j <= len; j++)
+		for (i = 0; i < arg->field_wd - len; i++)
+			arg->buff[i] = ' ';
+		for (j = 0; j < len; j++, i++)
 		{
 			digit = n / powten;
-			count += _putchar(digit + '0');
+			arg->buff[i] = digit + '0';
 			n -= digit * powten;
 			powten /= 10;
 		}
+		count = write(1, arg->buff, i);
 	}
 	else
 	{
-		count = _putchar('0');
+		for (i = 0; i < arg->field_wd - 1; i++)
+			arg->buff[i] = ' ';
+		arg->buff[i++] = '0';
+		count = write(1, arg->buff, i);
 	}
 	return (count);
 }

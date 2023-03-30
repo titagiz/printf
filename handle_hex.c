@@ -4,21 +4,20 @@
 
 /**
  * handle_flag_chars - handles flag characters
- * @cs: Conversion specifier
  * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_flag_chars(char cs, arg_t *arg)
+int handle_flag_chars(arg_t *arg)
 {
 	int nchar = 0;
 
-	if (cs == 'x' && arg->flag_c[0])
+	if (*(arg->cs) == 'x' && arg->flag_c[0])
 	{
 		nchar += _putchar('0');
 		nchar += _putchar('x');
 	}
-	if (cs == 'X' && arg->flag_c[0])
+	if (*(arg->cs) == 'X' && arg->flag_c[0])
 	{
 		nchar += _putchar('0');
 		nchar += _putchar('X');
@@ -26,17 +25,16 @@ int handle_flag_chars(char cs, arg_t *arg)
 	return (nchar);
 }
 /**
- * handle_xX - handles 'x','X' conversion specifier
- * @cs: Conversion specifier
+ * handle_hexX - handles 'x','X' conversion specifier
  * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int handle_xX(char cs, arg_t *arg)
+int handle_hexX(arg_t *arg)
 {
 	unsigned long int n;
-	int i, j, count = 1;
-	char *buff, tmp;
+	int i, j, count = 0;
+	char tmp;
 
 	n = arg->len_md[0] ? va_arg(*(arg->ap), unsigned long int) :
 		arg->len_md[1] ?
@@ -44,10 +42,6 @@ int handle_xX(char cs, arg_t *arg)
 		(unsigned int)va_arg(*(arg->ap), unsigned int);
 	if (n != 0)
 	{
-		buff = malloc(8);
-		if (!buff)
-			return (0);
-		count = handle_flag_chars(cs, arg);
 		i = 0;
 		while (n != 0)
 		{
@@ -55,41 +49,27 @@ int handle_xX(char cs, arg_t *arg)
 			if (tmp < 10)
 				tmp += 48;
 			else
-				if (cs == 'X')
+				if (*(arg->cs) == 'X')
 					tmp += 55;
 				else
 					tmp += 87;
-			buff[i++] = tmp;
+			arg->buff[i++] = tmp;
 			n /= 16;
 		}
 		count += i;
+		count += arg->flag_c[0] ? 2 : 0;
+		for (j = count; j < arg->field_wd; j++)
+			count += _putchar(' ');
+		handle_flag_chars(arg);
 		for (j = i - 1; j >= 0; j--)
-			_putchar(buff[j]);
-		free(buff);
+			_putchar(arg->buff[j]);
 	}
 	else
 	{
-		_putchar('0');
+		for (i = 0; i < arg->field_wd - 1; i++)
+			count += _putchar(' ');
+		count += _putchar('0');
 	}
 	return (count);
 }
-/**
- * handle_hex - handles 'x' conversion specifier
- * @arg: point to arguments structure
- *
- * Return: number of characters printed
- */
-int handle_hex(arg_t *arg)
-{
-	return (handle_xX('x', arg));
-}
-/**
- * handle_heX - handles 'x' conversion specifier
- * @arg: point to arguments structure
- *
- * Return: number of characters printed
- */
-int handle_heX(arg_t *arg)
-{
-	return (handle_xX('X', arg));
-}
+

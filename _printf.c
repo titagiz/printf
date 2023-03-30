@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdarg.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -12,7 +13,7 @@
 const char *get_cs_modifers(const char *format, arg_t *arg)
 {
 	arg->flag_c[0] = arg->flag_c[1] = arg->flag_c[2] = 0;
-	arg->len_md[0] = arg->len_md[1] = 0;
+	arg->len_md[0] = arg->len_md[1] = 0, arg->field_wd = 0;
 
 	while (*(format + 1) == '#' || *(format + 1) == '+'
 			|| *(format + 1) == ' ')
@@ -23,6 +24,16 @@ const char *get_cs_modifers(const char *format, arg_t *arg)
 			arg->flag_c[1] = 1;
 		if (*(format + 1) == ' ')
 			arg->flag_c[2] = 1;
+		format++;
+	}
+	if (*(format + 1) == '*')
+	{
+		arg->field_wd = va_arg(*(arg->ap), int);
+		format++;
+	}
+	else if (*(format + 1) > '0' && *(format + 1) <= '9')
+	{
+		arg->field_wd = *(format + 1) - '0';
 		format++;
 	}
 	if (*(format + 1) == 'l')
@@ -38,23 +49,6 @@ const char *get_cs_modifers(const char *format, arg_t *arg)
 	return (format);
 }
 /**
- * handle_invalid_cs - prints string when invalid cs is found
- * @arg: point to arguments structure
- *
- * Return: number of characters
- */
-int handle_invalid_cs(arg_t *arg)
-{
-	int nchars = 0;
-
-	nchars += _putchar('%');
-	nchars += arg->flag_c[0] ? _putchar('#') : 0;
-	nchars += arg->flag_c[1] ? _putchar('+') : 0;
-	nchars += !arg->flag_c[1] && arg->flag_c[2] ? _putchar(' ') : 0;
-
-	return (nchars);
-}
-/**
  * _printf - produces output according to a format
  * @format: a character string
  *
@@ -64,13 +58,17 @@ int _printf(const char *format, ...)
 {
 	int nchar = 0;
 	va_list ap;
-	int (*fp)(arg_t *);
 	arg_t arg = {0};
+	char *buff;
 
 	if (format == NULL)
 		return (-1);
+	buff = malloc(1024);
+	if (!buff)
+		return (-1);
 	va_start(ap, format);
 	arg.ap = &ap;
+	arg.buff = buff;
 	while (*format)
 	{
 		if (*format == '%')
@@ -81,16 +79,8 @@ int _printf(const char *format, ...)
 				nchar = -1;
 				break;
 			}
-			fp = get_cs_handler((format + 1));
-			if (fp)
-			{
-				nchar += fp(&arg);
-			}
-			else
-			{
-				nchar += handle_invalid_cs(&arg);
-				nchar += _putchar(*(format + 1));
-			}
+			arg.cs = (format + 1);
+			nchar += get_cs_handler(&arg);
 			format += 2;
 		}
 		else
@@ -100,5 +90,6 @@ int _printf(const char *format, ...)
 		}
 	}
 	va_end(ap);
+	free(buff);
 	return (nchar);
 }

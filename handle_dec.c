@@ -1,22 +1,71 @@
 #include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
 
 /**
- * chk_flag_chars - handles 'd' conversion specifier
- * @sign: Sign of the number
+ * handle_zero_value - handles zero value for 'd' conversion specifier
  * @arg: point to arguments structure
  *
  * Return: Number of characters printed
  */
-int chk_flag_chars(int sign, arg_t *arg)
+int handle_zero_value(arg_t *arg)
 {
-	int nchar = 0;
+	int nchar = 0, len = 0, i;
 
-	if (sign && arg->flag_c[1])
-		nchar += _putchar('+');
-	else if (sign && arg->flag_c[2])
+	if (arg->flag_c[1] || arg->flag_c[2])
+		len = 2;
+	else
+		len = 1;
+	for (i = 0; i < arg->field_wd - len; i++)
 		nchar += _putchar(' ');
+	if (arg->flag_c[1])
+		nchar += _putchar('+');
+	else if (arg->flag_c[2])
+		nchar += _putchar(' ');
+	nchar += _putchar('0');
 	return (nchar);
+}
+/**
+ * handle_none_zero_value - handles none zero value for 'd'
+ * conversion specifier
+ * @n: Number to print
+ * @arg: point to arguments structure
+ *
+ * Return: Number of characters printed
+ */
+int handle_none_zero_value(long int n, arg_t *arg)
+{
+	long int num, powten;
+	int len = 0, digit, j, i = 0;
+
+	num = n;
+	for (num = n; num; num /= 10, len++)
+		;
+	if (n < 0)
+	{
+		arg->buff[i++] = '-';
+		n *= -1;
+	}
+	else if (arg->flag_c[1] || arg->flag_c[2])
+	{
+		if (arg->flag_c[1])
+			arg->buff[i++] = '+';
+		else
+			arg->buff[i++] = ' ';
+	}
+	for (; i < arg->field_wd - len; i++)
+		arg->buff[i] = ' ';
+	powten = 1;
+	for (j = 1; j <= len - 1; j++)
+		powten *= 10;
+	for (j = 0; j < len; j++, i++)
+	{
+		digit = n / powten;
+		arg->buff[i] = digit + '0';
+		n -= (digit * powten);
+		powten /= 10;
+	}
+	return (write(1, arg->buff, i));
 }
 /**
  * handle_dec - handles 'd' conversion specifier
@@ -26,43 +75,15 @@ int chk_flag_chars(int sign, arg_t *arg)
  */
 int handle_dec(arg_t *arg)
 {
-	long int powten, n, num;
-	int len, j, digit, count = 0, sign = 1;
+	long int n;
+	int count;
 
 	n = arg->len_md[0] ? va_arg(*(arg->ap), long int) :
 		arg->len_md[1] ? (short int)va_arg(*(arg->ap), int) :
 		(int)va_arg(*(arg->ap), int);
 	if (n != 0)
-	{
-		if (n < 0)
-		{
-			count += _putchar('-');
-			sign = 0;
-		}
-		num = n, len = 0;
-		while (num != 0)
-		{
-			num /= 10;
-			len++;
-		}
-		powten = 1;
-		for (j = 1; j <= len - 1; j++)
-			powten *= 10;
-		count += chk_flag_chars(sign, arg);
-		for (j = 1; j <= len; j++)
-		{
-			digit = n / powten;
-			(n < 0) ? _putchar((digit * -1) + 48) :
-				_putchar(digit + '0');
-			count++;
-			n -= digit * powten;
-			powten /= 10;
-		}
-	}
+		count = handle_none_zero_value(n, arg);
 	else
-	{
-		count = chk_flag_chars(1, arg);
-		count += _putchar('0');
-	}
+		count = handle_zero_value(arg);
 	return (count);
 }
