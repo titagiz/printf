@@ -8,30 +8,29 @@
  */
 int handle_rot13(arg_t *arg)
 {
-	unsigned int j, i;
-	int count = 0;
+	int count = 0, i;
 	char *r;
-	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
-	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
 	r = va_arg(*(arg->ap), char *);
+	
+	if (r == NULL)
+		return (-1);
 
-	for (j = 0; r[j] != '\0'; j++)
+	for (; *(r + count) != '\0'; count++)
+		;
+
+	for (i = 0; i < count; i++)
 	{
-		for (i = 0; input[i] != '\0'; i++)
-		{
-			if (r[j] == input[i])
-			{
-				_putchar(output[i]);
-				count++;
-				break;
-			}
-		}
-		if (!input[i])
-		{
-			_putchar(r[i]);
-			count++;
-		}
+		if ((r[i] >= 97 && r[i] <= 109) ||
+		    (r[i] >= 65 && r[i] <= 77))
+			_putchar(*(r + i) + 13);
+
+		else if ((r[i] >= 110 && r[i] <= 122) ||
+			 (r[i] >= 78 && r[i] <= 90))
+			_putchar(*(r + i) - 13);
+
+		else _putchar(r[i]);
 	}
-		return (count);
+
+	return (count);
 }
