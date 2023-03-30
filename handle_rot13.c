@@ -27,7 +27,7 @@ int handle_rot13(arg_t *arg)
 				break;
 			}
 		}
-		if (!input[j])
+		if (!input[i])
 		{
 			_putchar(r[i]);
 			count++;
